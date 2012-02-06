@@ -41,6 +41,10 @@ gxp.plugins.FeatureEditorPanel = Ext.extend(gxp.plugins.FeatureEditor, {
 
     iconShowFeatureManagerTool: 'gxp-icon-addfeature',
 
+    bodyAttribute: null,
+
+    usernameAttribute: null,
+
     /** api: config[supportAbstractGeometry]
      *  Should we support layers that advertize an abstract geometry type?
      *  In this case, we will provide menu options for digitizing point, line
@@ -99,6 +103,10 @@ gxp.plugins.FeatureEditorPanel = Ext.extend(gxp.plugins.FeatureEditor, {
     createFeatureActionText: 'Create',
 
     featureManagerToolText: 'Fature manager',
+
+    featureManagerToolTip: 'Fature manager',
+
+    toolWinText: 'Fature manager',
 
     /** api: method[addActions]
      */
@@ -286,6 +294,9 @@ gxp.plugins.FeatureEditorPanel = Ext.extend(gxp.plugins.FeatureEditor, {
                         allowDelete: true,
                         width: 200,
                         height: 250,
+                        bodyAttribute: this.bodyAttribute,
+                        usernameAttribute: this.usernameAttribute,
+                        username: this.target.username,
                         listeners: {
                             "close": function() {
                                 if (this.readOnly === false) {
@@ -408,6 +419,7 @@ gxp.plugins.FeatureEditorPanel = Ext.extend(gxp.plugins.FeatureEditor, {
         var winActions = [
           new Ext.Button(new GeoExt.Action({
             id:'createFeature',
+            cls: 'x-form-toolbar-standardButton',
             //flex: 1,
             tooltip: this.createFeatureActionTip,
             text: this.createFeatureActionText,
@@ -420,9 +432,11 @@ gxp.plugins.FeatureEditorPanel = Ext.extend(gxp.plugins.FeatureEditor, {
             control: this.drawControl,
             deactivateOnDisable: true,
             map: this.target.mapPanel.map
-          })),
+          })
+          ),
           new Ext.Button(new GeoExt.Action({
             id:'editFeature',
+            cls: 'x-form-toolbar-standardButton',
             //flex: 1,
             tooltip: this.editFeatureActionTip,
             text: this.editFeatureActionText,
@@ -440,22 +454,24 @@ gxp.plugins.FeatureEditorPanel = Ext.extend(gxp.plugins.FeatureEditor, {
         var win = new Ext.Window({
           title: this.toolWinText,
           closable:true,
-          width:100,
-          height:58,
+          border: false,
+          width: 120,
+          height: 55,
           //border:false,
-          plain:true,
+          plain: true,
           //layout: 'border',
           layout: {
               type: 'hbox',
               pack: 'start'
           },
-          items: winActions,
-          closeAction:'hide'
+          tbar: winActions,
+          closeAction: 'hide'
         })
         
 
         action = {
           text: this.featureManagerToolText
+          ,tooltip: this.featureManagerToolTip
           ,iconCls: this.iconShowFeatureManagerTool
           ,handler: function(e){
             var box = Ext.fly(e.container.dom).getBox()
