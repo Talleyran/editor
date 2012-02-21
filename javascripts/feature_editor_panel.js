@@ -455,7 +455,7 @@ gxp.plugins.FeatureEditorPanel = Ext.extend(gxp.plugins.FeatureEditor, {
           title: this.toolWinText,
           closable:true,
           border: false,
-          width: 120,
+          width: 125,
           height: 55,
           //border:false,
           plain: true,
