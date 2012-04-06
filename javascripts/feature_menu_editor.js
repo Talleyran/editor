@@ -437,7 +437,7 @@ gxp.plugins.FeatureMenuEditor = Ext.extend(gxp.plugins.FeatureEditor, {
         } else {
             button.disable();
         }
-    },
+    }
 
 });
 
