@@ -536,8 +536,10 @@ gxp.plugins.FeatureEditorPanel = Ext.extend(gxp.plugins.FeatureEditor, {
      */
     enableOrDisable: function() {
         var disable = !this.schema || !this.target.isAuthorized();
-        this.winActions[0].setDisabled(disable);
-        this.winActions[1].setDisabled(disable);
+        if(this.winActions){
+          this.winActions[0].setDisabled(disable);
+          this.winActions[1].setDisabled(disable);
+        }
         return disable;
     },
     
